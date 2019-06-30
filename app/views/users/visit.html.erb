@@ -1,0 +1,4 @@
+<h1>Hello <%= @user.name.capitalize %></h1>
+<p id="1">Thanks for visiting.</p>
+<p id="2">You have visited this site <%= pluralize(@user.visits, 'time')%>.</p>
+<%= link_to "Good bye" , goodbye_path(@user.id)  %>

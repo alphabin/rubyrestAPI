@@ -1,0 +1,9 @@
+<h1>Welcome to my page.</h1>
+<p>Please enter your first name</p>
+<%= form_tag( visit_path ) do  %>
+  <%= label_tag :name %>
+  <%= text_field_tag :name %>
+  <br/>
+  <br/>
+  <%= submit_tag 'Signin' %>
+<% end %>
