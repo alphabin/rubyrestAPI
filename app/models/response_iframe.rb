@@ -7,20 +7,14 @@ class ResponseIframe
     def initialize urlIn
         @url = urlIn
         @iFrameSupported = false
+        @xFrameStatus = ""
+        @xXSSProtection= ""
     end
     
     def setvalid truth
         @iFrameSupported = truth
     end
-    
-    def to_json
-        obj = {}
-        instance_variables.map do |var|
-            obj[var] = instance_variable_get(var)
-        end
-        JSON.dump(obj)
-    end
-    
+
     def checkURL
         url =  @url
         response = HTTParty.get("https://"+url)
@@ -40,6 +34,9 @@ class ResponseIframe
         puts xXSS.to_s
         if !xFrame.nil? || !xXSS.nil?
             @iFrameSupported = false
+            @xFrameStatus = xFrame.to_s
+            @xXSSProtection = xXSS.to_s
+            
         else
              @iFrameSupported = true
         end
