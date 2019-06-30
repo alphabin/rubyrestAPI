@@ -2,15 +2,15 @@ require 'httparty'
 
 class ResponseIframe
     
-    attr_accessor :url, :isValid
+    attr_accessor :url, :iFrameSupported
     
     def initialize urlIn
         @url = urlIn
-        @isValid = false
+        @iFrameSupported = false
     end
     
     def setvalid truth
-        @isValid = truth
+        @iFrameSupported = truth
     end
     
     def to_json
@@ -34,8 +34,16 @@ class ResponseIframe
         end
         res = response.to_json
         puts res
-        xyz = JSON.parse(res.to_s)['date']
-        puts "Header #{xyz}"
+        xFrame = response.response['x-frame-options']
+        xXSS = response.response['x-xss-protection']
+        puts xFrame.to_s
+        puts xXSS.to_s
+        if !xFrame.nil? || !xXSS.nil?
+            @iFrameSupported = false
+        else
+             @iFrameSupported = true
+        end
+        
         
     end
     
