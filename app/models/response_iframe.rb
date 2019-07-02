@@ -9,6 +9,7 @@ class ResponseIframe
         @iFrameSupported = false
         @xFrameStatus = ""
         @xXSSProtection= ""
+        @serverStat = ""
     end
     
     def setvalid truth
@@ -21,10 +22,13 @@ class ResponseIframe
         case response.code
             when 200
                 puts "All good!"
+                @serverStat = "All good!"
             when 404
                 puts "O noes not found!"
+                @serverStat = "O noes not found!"
             when 500...600
-                puts "ZOMG ERROR #{response.code}"
+                puts "ERROR #{response.code}"
+                @serverStat = "ERROR #{response.code}";
         end
         res = response.to_json
         puts res
