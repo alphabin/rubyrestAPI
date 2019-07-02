@@ -42,12 +42,9 @@ class ResponseIframe
             @xXSSProtection = xXSS.to_s
             
         else
-             @iFrameSupported = true
+            @iFrameSupported = true
         end
-        
-        
     end
-    
 end
  
 
